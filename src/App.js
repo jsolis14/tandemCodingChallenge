@@ -1,8 +1,9 @@
 import React from 'react';
+import TriviaGame from './components/TriviaGame';
 
 function App() {
   return (
-    <h1>Hello world!</h1>
+    <TriviaGame />
   );
 }
 
