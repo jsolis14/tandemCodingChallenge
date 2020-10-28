@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import questionData from '../Apprentice_TandemFor400_Data.json';
+import AnswerChoices from './AnswerChoices';
 import Question from './Question';
 
 function getRandomInt(max) {
@@ -33,6 +34,7 @@ export default function TriviaGame() {
     return (
         <div>
             <Question questionList={questionList} questionIdx={questionIdx} />
+            <AnswerChoices questionList={questionList} questionIdx={questionIdx} />
         </div>
     )
 }
