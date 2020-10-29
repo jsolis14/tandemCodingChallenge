@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+
 
 function shuffle(array) {
     for (let i = array.length - 1; i >= 0; i--) {
@@ -18,20 +21,32 @@ function getAnswerChoices(questionList, questionIdx) {
     return answerList
 }
 
-export default function AnswerChoices({ questionList, questionIdx }) {
+
+export default function AnswerChoices({ questionList, questionIdx, setUserAnswer, userAnswer }) {
+    const [selectedIdx, setSelectedIdx] = useState(null)
+    const [answers, setAnswers] = useState([])
+
+    function handleAnswerClick(event, idx) {
+        setSelectedIdx(idx)
+        setUserAnswer(answers[idx])
+
+    }
 
     useEffect(() => {
+        if (questionList.length) {
+            setAnswers(getAnswerChoices(questionList, questionIdx))
+            setUserAnswer(null)
 
-    })
+        }
+    }, [questionList, questionIdx])
 
-    if (questionList.length > 0) {
-        return (
-            <div>
-                {getAnswerChoices(questionList, questionIdx).map(ele => (<div key={ele}>{ele}</div>))}
-            </div>
-        )
-    } else {
-        return 'loading answers'
-    }
+    return (
+        <List>
+            {answers.map((ele, idx) => (
+                <ListItem button onClick={(event) => handleAnswerClick(event, idx)} selected={selectedIdx === idx && userAnswer !== null} value={idx} key={idx}>{`${idx + 1}) ${ele}`}</ListItem>
+            ))}
+        </List>
+    )
+
 
 }
