@@ -20,39 +20,52 @@ function generateQuestions(questionData, numOfQuestions) {
 const answerIsCorrect = (questionList, questionIdx, answer) => questionList[questionIdx].correct === answer
 
 
-function handleNextQuestion(questionList, questionIdx, answer, score, setQuestionIdx, setScore) {
-    if (answerIsCorrect(questionList, questionIdx, answer)) {
-        setScore(score + 10)
-    }
 
-    setQuestionIdx(questionIdx + 1)
-}
+
 
 export default function TriviaGame() {
     const [score, setScore] = useState(0)
     const [questionList, setQuestionList] = useState([])
     const [questionIdx, setQuestionIdx] = useState(0)
     const [userAnswer, setUserAnswer] = useState(null)
-    // const [selectedIdx, setSelectedIdx] = useState(null)
-    // const [answers, setAnswers] = useState([])
 
+    const [submitPressed, setSubmitPressed] = useState(false)
+    const [responseMessage, setResponseMessage] = useState('')
+
+    function handleNextQuestion() {
+        setQuestionIdx(questionIdx + 1)
+        setSubmitPressed(false)
+        setUserAnswer(null)
+        setResponseMessage('')
+    }
+
+    function handleSubmit() {
+        if (answerIsCorrect(questionList, questionIdx, userAnswer)) {
+            setScore(score + 10)
+            setResponseMessage('Good job! You got this one right')
+        } else {
+            setResponseMessage(`Better luck next time. The correct answer was ${questionList[questionIdx].correct}`)
+        }
+        setSubmitPressed(true)
+    }
 
     useEffect(() => {
         // generate the list of questions if component was just rendered
         if (questionList.length === 0) {
             setQuestionList(generateQuestions(questionData, 10))
         } else {
-            // setAnswers(getAnswerChoices(questionList, questionIdx))
         }
-    }, [questionIdx, questionList])
+    }, [questionList])
 
     return (
         <div>
             <div>Score: {score}</div>
             <Question questionList={questionList} questionIdx={questionIdx} />
+            <div>{responseMessage}</div>
             <AnswerChoices questionList={questionList} questionIdx={questionIdx} setUserAnswer={setUserAnswer} userAnswer={userAnswer} />
             <div>
-                {userAnswer ? <button onClick={() => handleNextQuestion(questionList, questionIdx, userAnswer, score, setQuestionIdx, setScore)}>Go To Next</button> : <></>}
+                {userAnswer && !submitPressed ? <button onClick={handleSubmit}>Submit Answer</button> : <></>}
+                {userAnswer && submitPressed ? <button onClick={handleNextQuestion}>Next Question</button> : <></>}
             </div>
         </div>
     )
