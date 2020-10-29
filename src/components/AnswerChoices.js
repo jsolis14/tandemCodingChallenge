@@ -4,13 +4,10 @@ import ListItem from '@material-ui/core/ListItem';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '100%',
-        maxWidth: 360,
-        backgroundColor: theme.palette.background.paper,
-    },
-    selected: {
-        backgroundColor: 'red'
+    answerChoice: {
+        border: '2px solid',
+        margin: '5px',
+        backgroundColor: '#485381'
     }
 }));
 
@@ -34,16 +31,17 @@ function getAnswerChoices(questionList, questionIdx) {
 
 
 export default function AnswerChoices({ questionList, questionIdx, setUserAnswer, userAnswer, submitPressed }) {
+    const classes = useStyles()
     const [selectedIdx, setSelectedIdx] = useState(null)
     const [answers, setAnswers] = useState([])
 
     const answerIsCorrectStyling = (idx) => {
         if (questionList[questionIdx].correct === answers[idx] && submitPressed) {
             console.log(questionList[questionIdx].correct, answers[selectedIdx])
-            return { backgroundColor: 'green' }
+            return { backgroundColor: '#4caf50' }
         } else if (submitPressed) {
 
-            return { backgroundColor: 'red' }
+            return { backgroundColor: '#f44336' }
         }
     }
 
@@ -64,7 +62,7 @@ export default function AnswerChoices({ questionList, questionIdx, setUserAnswer
     return (
         <List>
             {answers.map((ele, idx) => (
-                <ListItem button style={answerIsCorrectStyling(idx)} onClick={(event) => handleAnswerClick(event, idx)} selected={(selectedIdx === idx && userAnswer !== null) || submitPressed} value={idx} key={idx}>{`${idx + 1}) ${ele}`}</ListItem>
+                <ListItem button className={classes.answerChoice} style={answerIsCorrectStyling(idx)} onClick={(event) => handleAnswerClick(event, idx)} selected={(selectedIdx === idx && userAnswer !== null) || submitPressed} value={idx} key={idx}>{`${idx + 1}) ${ele}`}</ListItem>
             ))
             }
         </List >
