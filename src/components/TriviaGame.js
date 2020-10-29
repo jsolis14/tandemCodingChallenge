@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import questionData from '../Apprentice_TandemFor400_Data.json';
 import AnswerChoices from './AnswerChoices';
+import EndScreen from './EndScreen';
 import Question from './Question';
+import StartScreen from './StartScreen';
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
@@ -23,7 +25,7 @@ const answerIsCorrect = (questionList, questionIdx, answer) => questionList[ques
 export default function TriviaGame() {
     const [score, setScore] = useState(0)
     const [questionList, setQuestionList] = useState([])
-    const [questionIdx, setQuestionIdx] = useState(0)
+    const [questionIdx, setQuestionIdx] = useState(null)
     const [userAnswer, setUserAnswer] = useState(null)
 
     const [submitPressed, setSubmitPressed] = useState(false)
@@ -54,16 +56,29 @@ export default function TriviaGame() {
         }
     }, [questionList])
 
-    return (
-        <div>
-            <div>Score: {score}</div>
-            <Question questionList={questionList} questionIdx={questionIdx} />
-            <div>{responseMessage}</div>
-            <AnswerChoices questionList={questionList} questionIdx={questionIdx} setUserAnswer={setUserAnswer} userAnswer={userAnswer} submitPressed={submitPressed} />
+    if (questionIdx === null) {
+        return <StartScreen setQuestionIdx={setQuestionIdx} />
+    } else if (questionIdx <= 9) {
+        return (
             <div>
-                {userAnswer && !submitPressed ? <button onClick={handleSubmit}>Submit Answer</button> : <></>}
-                {userAnswer && submitPressed ? <button onClick={handleNextQuestion}>Next Question</button> : <></>}
+                <div>
+                    <div>Score: {score}</div>
+                    <div>Problem: {questionIdx + 1}/10 </div>
+                </div>
+
+                <Question questionList={questionList} questionIdx={questionIdx} />
+                <div>{responseMessage}</div>
+                <AnswerChoices questionList={questionList} questionIdx={questionIdx} setUserAnswer={setUserAnswer} userAnswer={userAnswer} submitPressed={submitPressed} />
+                <div>
+                    {userAnswer && !submitPressed ? <button onClick={handleSubmit}>Submit Answer</button> : <></>}
+                    {userAnswer && submitPressed ? <button onClick={handleNextQuestion}>Next Question</button> : <></>}
+                </div>
             </div>
-        </div>
-    )
+        )
+    } else {
+        return <EndScreen score={score} />
+    }
+
+
+
 }
