@@ -31,6 +31,15 @@ export default function TriviaGame() {
     const [submitPressed, setSubmitPressed] = useState(false)
     const [responseMessage, setResponseMessage] = useState('')
 
+    function resetGame() {
+        setScore(0)
+        setQuestionList([])
+        setQuestionIdx(null)
+        setUserAnswer(null)
+        setSubmitPressed(false)
+        setResponseMessage('')
+    }
+
     function handleNextQuestion() {
         setQuestionIdx(questionIdx + 1)
         setSubmitPressed(false)
@@ -76,7 +85,7 @@ export default function TriviaGame() {
             </div>
         )
     } else {
-        return <EndScreen score={score} />
+        return <EndScreen score={score} resetGame={resetGame} />
     }
 
 

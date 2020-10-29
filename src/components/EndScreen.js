@@ -1,11 +1,11 @@
 import React from 'react'
 
-export default function EndScreen({ score }) {
+export default function EndScreen({ score, resetGame }) {
 
     return (
         <div>
             <div>{`your score was ${score}`}</div>
-            <button >Reset Game</button>
+            <button onClick={resetGame}>Reset Game</button>
         </div>
     )
 }
