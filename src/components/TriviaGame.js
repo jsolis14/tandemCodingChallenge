@@ -78,7 +78,8 @@ export default function TriviaGame() {
     const classes = useStyles();
     const [score, setScore] = useState(0)
     const [questionList, setQuestionList] = useState([])
-    const [questionIdx, setQuestionIdx] = useState(9)
+    const [answerList, setAnswerList] = useState([])
+    const [questionIdx, setQuestionIdx] = useState(null)
     const [userAnswer, setUserAnswer] = useState(null)
     const [userAnswers, setUserAnswers] = useState([])
     const [submitPressed, setSubmitPressed] = useState(false)
@@ -92,6 +93,7 @@ export default function TriviaGame() {
         setSubmitPressed(false)
         setResponseMessage('')
         setUserAnswers([])
+        setAnswerList([])
     }
 
     function handleNextQuestion() {
@@ -136,7 +138,7 @@ export default function TriviaGame() {
                     <div className={classes.response}>
                         <div>{responseMessage}</div>
                     </div>
-                    <AnswerChoices questionList={questionList} questionIdx={questionIdx} setUserAnswer={setUserAnswer} userAnswer={userAnswer} submitPressed={submitPressed} />
+                    <AnswerChoices questionList={questionList} questionIdx={questionIdx} setUserAnswer={setUserAnswer} userAnswer={userAnswer} submitPressed={submitPressed} setAnswerList={setAnswerList} answerList={answerList} />
                     <div>
                         {userAnswer && !submitPressed ? <Button className={classes.button} onClick={handleSubmit}>Submit Answer</Button> : <></>}
                         {userAnswer && submitPressed ? <Button className={classes.button} onClick={handleNextQuestion}>Next Question</Button> : <></>}
@@ -146,7 +148,7 @@ export default function TriviaGame() {
             </div>
         )
     } else {
-        return <EndScreen score={score} resetGame={resetGame} userAnswers={userAnswers} questionList={questionList} />
+        return <EndScreen score={score} resetGame={resetGame} userAnswers={userAnswers} questionList={questionList} answerList={answerList} />
     }
 
 

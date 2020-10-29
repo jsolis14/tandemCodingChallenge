@@ -30,14 +30,13 @@ function getAnswerChoices(questionList, questionIdx) {
 }
 
 
-export default function AnswerChoices({ questionList, questionIdx, setUserAnswer, userAnswer, submitPressed }) {
+export default function AnswerChoices({ questionList, questionIdx, setUserAnswer, userAnswer, submitPressed, setAnswerList, answerList }) {
     const classes = useStyles()
     const [selectedIdx, setSelectedIdx] = useState(null)
     const [answers, setAnswers] = useState([])
 
     const answerIsCorrectStyling = (idx) => {
         if (questionList[questionIdx].correct === answers[idx] && submitPressed) {
-            console.log(questionList[questionIdx].correct, answers[selectedIdx])
             return { backgroundColor: '#4caf50' }
         } else if (submitPressed) {
 
@@ -53,9 +52,10 @@ export default function AnswerChoices({ questionList, questionIdx, setUserAnswer
 
     useEffect(() => {
         if (questionList.length) {
-            setAnswers(getAnswerChoices(questionList, questionIdx))
+            const answerChoices = getAnswerChoices(questionList, questionIdx)
+            setAnswers(answerChoices)
             setUserAnswer(null)
-
+            setAnswerList([...answerList, answerChoices])
         }
     }, [questionList, questionIdx])
 
