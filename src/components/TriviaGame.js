@@ -20,9 +20,6 @@ function generateQuestions(questionData, numOfQuestions) {
 const answerIsCorrect = (questionList, questionIdx, answer) => questionList[questionIdx].correct === answer
 
 
-
-
-
 export default function TriviaGame() {
     const [score, setScore] = useState(0)
     const [questionList, setQuestionList] = useState([])
@@ -62,7 +59,7 @@ export default function TriviaGame() {
             <div>Score: {score}</div>
             <Question questionList={questionList} questionIdx={questionIdx} />
             <div>{responseMessage}</div>
-            <AnswerChoices questionList={questionList} questionIdx={questionIdx} setUserAnswer={setUserAnswer} userAnswer={userAnswer} />
+            <AnswerChoices questionList={questionList} questionIdx={questionIdx} setUserAnswer={setUserAnswer} userAnswer={userAnswer} submitPressed={submitPressed} />
             <div>
                 {userAnswer && !submitPressed ? <button onClick={handleSubmit}>Submit Answer</button> : <></>}
                 {userAnswer && submitPressed ? <button onClick={handleNextQuestion}>Next Question</button> : <></>}
