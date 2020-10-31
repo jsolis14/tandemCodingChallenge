@@ -41,7 +41,9 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'space-between',
         margin: '5px',
-        padding: '5px'
+        padding: '5px',
+        fontSize: '20px',
+
     },
     response: {
         margin: '5px',
@@ -49,7 +51,9 @@ const useStyles = makeStyles((theme) => ({
     },
     question: {
         margin: '5px',
-        padding: '5px'
+        padding: '5px',
+        width: '600px',
+        textAlign: 'center'
     },
     gameContainer: {
         display: 'flex',

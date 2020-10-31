@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         margin: 'auto',
         fontFamily: 'Roboto Mono',
-        fontSize: '3rem',
         [theme.breakpoints.up('xl')]: {
             width: '1100px',
         }
@@ -39,8 +38,19 @@ const useStyles = makeStyles((theme) => ({
         border: '2px solid',
         margin: '5px',
         backgroundColor: '#485381'
+    },
+    question: {
+        margin: '5px',
+        padding: '5px',
+        width: '600px',
+        textAlign: 'center'
+    },
+    questionTitle: {
+        fontSize: '25px'
+    },
+    score: {
+        fontSize: '20px'
     }
-
 }));
 
 function highlightCorrect(choice, questionList, idx) {
@@ -53,13 +63,13 @@ export default function EndScreen({ score, resetGame, userAnswers, questionList,
     return (
         <div className={classes.root} data-testid='end screen'>
             <div>
-                <div data-testid='final score'>{`Your score was: ${score}`}</div>
+                <div data-testid='final score' className={classes.score}>{`Your score was: ${score}`}</div>
             </div>
-            <div data-testid='question list'>
+            <div data-testid='question list' >
                 {userAnswers.map((userAns, i) => {
                     return (
-                        <div key={questionList[i].question}>
-                            <div>{questionList[i].question}</div>
+                        <div key={questionList[i].question} className={classes.question}>
+                            <div className={classes.questionTitle}>{questionList[i].question}</div>
                             <div>
                                 {answerList[i].map((choice, idx) => {
                                     return <ListItem className={classes.answerChoice} style={highlightCorrect(choice, questionList, i)} selected={userAns === choice} key={choice}>{`${idx + 1}) ${choice}`}</ListItem>
