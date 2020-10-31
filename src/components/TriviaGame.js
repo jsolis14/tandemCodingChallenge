@@ -126,11 +126,11 @@ export default function TriviaGame() {
         return <StartScreen setQuestionIdx={setQuestionIdx} />
     } else if (questionIdx <= 9) {
         return (
-            <div className={classes.root}>
+            <div className={classes.root} data-testid='trivia game'>
                 <div className={classes.gameContainer}>
                     <div className={classes.scoreBoard}>
-                        <div>Score: {score}</div>
-                        <div>Problem: {questionIdx + 1}/10 </div>
+                        <div data-testid='score'>Score: {score}</div>
+                        <div data-testid='question counter'>Problem: {questionIdx + 1}/10 </div>
                     </div>
                     <div className={classes.question}>
                         <Question questionList={questionList} questionIdx={questionIdx} />
@@ -140,8 +140,8 @@ export default function TriviaGame() {
                     </div>
                     <AnswerChoices questionList={questionList} questionIdx={questionIdx} setUserAnswer={setUserAnswer} userAnswer={userAnswer} submitPressed={submitPressed} setAnswerList={setAnswerList} answerList={answerList} />
                     <div>
-                        {userAnswer && !submitPressed ? <Button className={classes.button} onClick={handleSubmit}>Submit Answer</Button> : <></>}
-                        {userAnswer && submitPressed ? <Button className={classes.button} onClick={handleNextQuestion}>Next Question</Button> : <></>}
+                        {userAnswer && !submitPressed ? <Button className={classes.button} data-testid='submit answer' onClick={handleSubmit}>Submit Answer</Button> : <></>}
+                        {userAnswer && submitPressed ? <Button className={classes.button} data-testid='next question' onClick={handleNextQuestion}>Next Question</Button> : <></>}
                     </div>
                 </div>
 

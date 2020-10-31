@@ -42,7 +42,7 @@ export default function StartScreen({ setQuestionIdx }) {
     return (
         <div className={classes.root}>
             <div className={classes.title}>Welcome to Tandem Trivia</div>
-            <Button className={classes.button} onClick={() => setQuestionIdx(0)}>Get Started</Button>
+            <Button data-testid='start button' className={classes.button} onClick={() => setQuestionIdx(0)}>Get Started</Button>
         </div>
     )
 }

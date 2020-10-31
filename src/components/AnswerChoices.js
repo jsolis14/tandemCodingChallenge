@@ -60,9 +60,9 @@ export default function AnswerChoices({ questionList, questionIdx, setUserAnswer
     }, [questionList, questionIdx])
 
     return (
-        <List>
+        <List data-testid='answer choices'>
             {answers.map((ele, idx) => (
-                <ListItem button className={classes.answerChoice} style={answerIsCorrectStyling(idx)} onClick={(event) => handleAnswerClick(event, idx)} selected={(selectedIdx === idx && userAnswer !== null) || submitPressed} value={idx} key={idx}>{`${idx + 1}) ${ele}`}</ListItem>
+                <ListItem button data-testid={`answer choice ${idx}`} className={classes.answerChoice} style={answerIsCorrectStyling(idx)} onClick={(event) => handleAnswerClick(event, idx)} selected={(selectedIdx === idx && userAnswer !== null) || submitPressed} value={idx} key={idx}>{`${idx + 1}) ${ele}`}</ListItem>
             ))
             }
         </List >

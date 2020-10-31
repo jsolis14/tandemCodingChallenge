@@ -53,15 +53,15 @@ function highlightCorrect(choice, questionList, idx) {
 export default function EndScreen({ score, resetGame, userAnswers, questionList, answerList }) {
     const classes = useStyles();
     return (
-        <div className={classes.root}>
+        <div className={classes.root} data-testid='end screen'>
             <div>
                 <div>{`Your score was: ${score}`}</div>
             </div>
-            <div>
+            <div data-testid='question list'>
                 {userAnswers.map((userAns, i) => {
                     return (
-                        <div>
-                            <div key={questionList[i].question}>{questionList[i].question}</div>
+                        <div key={questionList[i].question}>
+                            <div>{questionList[i].question}</div>
                             <div>
                                 {answerList[i].map((choice, idx) => {
                                     return <ListItem className={classes.answerChoice} style={highlightCorrect(choice, questionList, i)} selected={userAns === choice} key={choice}>{`${idx + 1}) ${choice}`}</ListItem>
@@ -73,7 +73,7 @@ export default function EndScreen({ score, resetGame, userAnswers, questionList,
                 })}
             </div>
             <div>
-                <Button className={classes.button} onClick={resetGame}>Reset Game</Button>
+                <Button className={classes.button} onClick={resetGame} data-testid='reset game'>Reset Game</Button>
             </div>
         </div>
     )

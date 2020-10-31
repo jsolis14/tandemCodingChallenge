@@ -4,7 +4,7 @@ export default function Question({ questionList, questionIdx }) {
 
     if (questionList.length > 0) {
         return (
-            <div>
+            <div data-testid='question'>
                 {questionList[questionIdx].question}
             </div>
         )
