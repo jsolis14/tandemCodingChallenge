@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { fireEvent, render, waitForDomChange } from '@testing-library/react';
 import StartScreen from '../components/StartScreen';
 import '@testing-library/jest-dom/extend-expect'
 

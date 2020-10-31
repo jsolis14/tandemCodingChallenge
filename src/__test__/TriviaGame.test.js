@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { fireEvent, render, waitForDomChange } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import TriviaGame from '../components/TriviaGame';
 import '@testing-library/jest-dom/extend-expect'
 import questionData from '../Apprentice_TandemFor400_Data.json';
-import Question from '../components/Question';
 
 describe('Trivia Game component is responsible for the main logic of the game', () => {
     it('renders without crashing', () => {
