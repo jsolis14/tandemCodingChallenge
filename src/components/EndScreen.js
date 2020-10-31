@@ -53,7 +53,7 @@ export default function EndScreen({ score, resetGame, userAnswers, questionList,
     return (
         <div className={classes.root} data-testid='end screen'>
             <div>
-                <div>{`Your score was: ${score}`}</div>
+                <div data-testid='final score'>{`Your score was: ${score}`}</div>
             </div>
             <div data-testid='question list'>
                 {userAnswers.map((userAns, i) => {
