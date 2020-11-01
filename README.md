@@ -1,4 +1,5 @@
 # Tandem Coding Challenge
+![](trivia-game.gif)
 
 ## System Dependencies
 * Node.js
